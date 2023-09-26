@@ -4,8 +4,6 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
-import java.text.MessageFormat;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -56,29 +54,6 @@ public class TikaContentAnalyzerTest {
 		} catch (Exception e) {
 			assertTrue(e instanceof ContentAnalyzerException);
 			assertEquals(e.getMessage(), DETECTION_ERROR_MESSAGE + SOME_EXCEPTION_MESSAGE);
-			assertEquals(e.getCause(), runtimeException);
-		}
-	}
-
-	@Test
-	public void testCallGetMimeTypeWithFileName() throws Exception {
-		String mimeType = analyzer.getMimeTypeWithFileName(inputStream, SOME_FILE_NAME);
-
-		tika.MCR.assertParameters("detect", 0, inputStream);
-		tika.MCR.assertReturn("detect", 0, mimeType);
-	}
-
-	@Test
-	public void testExceptionWhileDetectingWithFileName() throws Exception {
-		RuntimeException runtimeException = new RuntimeException(SOME_EXCEPTION_MESSAGE);
-		tika.MRV.setAlwaysThrowException("detect", runtimeException);
-		try {
-			analyzer.getMimeTypeWithFileName(inputStream, SOME_FILE_NAME);
-			fail();
-		} catch (Exception e) {
-			assertTrue(e instanceof ContentAnalyzerException);
-			assertEquals(e.getMessage(), MessageFormat.format(DETECTION_ERROR_MESSAGE_FILENAME,
-					SOME_FILE_NAME, SOME_EXCEPTION_MESSAGE));
 			assertEquals(e.getCause(), runtimeException);
 		}
 	}

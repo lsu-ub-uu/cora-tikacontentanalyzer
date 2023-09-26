@@ -54,7 +54,7 @@ public class RealTikaContentAnalyzerTest {
 	}
 
 	@Test(enabled = true)
-	public void testExcelODF() throws Exception {
+	public void testSheetODF() throws Exception {
 		File initialFile = new File(TEST_RESOURCE_PATH + "testSheetODF.ods");
 		InputStream resouce = new FileInputStream(initialFile);
 
@@ -64,7 +64,7 @@ public class RealTikaContentAnalyzerTest {
 	}
 
 	@Test(enabled = true)
-	public void testExcel97_2003() throws Exception {
+	public void testSheetExcel97_2003() throws Exception {
 		File initialFile = new File(TEST_RESOURCE_PATH + "testSheetExcel97-2003.xls");
 		InputStream resouce = new FileInputStream(initialFile);
 
@@ -84,6 +84,37 @@ public class RealTikaContentAnalyzerTest {
 	}
 
 	@Test(enabled = true)
+	public void testPresentationODF() throws Exception {
+		File initialFile = new File(TEST_RESOURCE_PATH + "testPresentationODF.odp");
+		InputStream resouce = new FileInputStream(initialFile);
+
+		String mimeType = analyzer.getMimeType(resouce);
+
+		assertEquals(mimeType, "application/vnd.oasis.opendocument.presentation");
+	}
+
+	@Test(enabled = true)
+	public void testPresentationPowerPoint97_2003() throws Exception {
+		File initialFile = new File(TEST_RESOURCE_PATH + "testPresentationPowerPoint97-2003.ppt");
+		InputStream resouce = new FileInputStream(initialFile);
+
+		String mimeType = analyzer.getMimeType(resouce);
+
+		assertEquals(mimeType, "application/vnd.ms-powerpoint");
+	}
+
+	@Test(enabled = true)
+	public void testPresentationPowerPoint2007_365() throws Exception {
+		File initialFile = new File(TEST_RESOURCE_PATH + "testPresentationPowerPoint2007-365.pptx");
+		InputStream resource = new FileInputStream(initialFile);
+
+		String mimeType = analyzer.getMimeType(resource);
+
+		assertEquals(mimeType,
+				"application/vnd.openxmlformats-officedocument.presentationml.presentation");
+	}
+
+	@Test(enabled = true)
 	public void testMp4() throws Exception {
 		File initialFile = new File(TEST_RESOURCE_PATH + "tikaVideo.mp4");
 		InputStream resource = new FileInputStream(initialFile);
@@ -91,6 +122,36 @@ public class RealTikaContentAnalyzerTest {
 		String mimeType = analyzer.getMimeType(resource);
 
 		assertEquals(mimeType, "video/mp4");
+	}
+
+	@Test(enabled = true)
+	public void testMp3() throws Exception {
+		File initialFile = new File(TEST_RESOURCE_PATH + "tikaAudio.mp3");
+		InputStream resource = new FileInputStream(initialFile);
+
+		String mimeType = analyzer.getMimeType(resource);
+
+		assertEquals(mimeType, "audio/mpeg");
+	}
+
+	@Test(enabled = true)
+	public void testTarGz() throws Exception {
+		File initialFile = new File(TEST_RESOURCE_PATH + "Archive.tar.gz");
+		InputStream resource = new FileInputStream(initialFile);
+
+		String mimeType = analyzer.getMimeType(resource);
+
+		assertEquals(mimeType, "application/gzip");
+	}
+
+	@Test(enabled = true)
+	public void testZip() throws Exception {
+		File initialFile = new File(TEST_RESOURCE_PATH + "Archive.zip");
+		InputStream resource = new FileInputStream(initialFile);
+
+		String mimeType = analyzer.getMimeType(resource);
+
+		assertEquals(mimeType, "application/zip");
 	}
 
 }
