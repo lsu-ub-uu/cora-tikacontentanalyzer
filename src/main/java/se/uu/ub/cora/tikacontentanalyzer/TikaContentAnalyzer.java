@@ -1,9 +1,9 @@
 package se.uu.ub.cora.tikacontentanalyzer;
 
 import java.io.InputStream;
-import java.text.MessageFormat;
 
 import org.apache.tika.Tika;
+import org.apache.tika.io.TikaInputStream;
 
 import se.uu.ub.cora.contentanalyzer.ContentAnalyzer;
 import se.uu.ub.cora.contentanalyzer.ContentAnalyzerException;
@@ -22,25 +22,12 @@ public class TikaContentAnalyzer implements ContentAnalyzer {
 	@Override
 	public String getMimeType(InputStream resource) {
 		try {
-			return tika.detect(resource);
+			TikaInputStream tikaInputStream = TikaInputStream.get(resource);
+			return tika.detect(tikaInputStream);
 		} catch (Exception e) {
 			throw ContentAnalyzerException
 					.withMessageAndException(DETECTION_ERROR_MESSAGE + e.getMessage(), e);
 		}
 	}
 
-	@Override
-	public String getMimeTypeWithFileName(InputStream resource, String filename) {
-		try {
-			return tika.detect(resource, filename);
-		} catch (Exception e) {
-			throw ContentAnalyzerException
-					.withMessageAndException(buildErrorMessage(e.getMessage(), filename), e);
-		}
-	}
-
-	private String buildErrorMessage(String exceptionErrorMessage, String filename) {
-		return MessageFormat.format(DETECTION_ERROR_MESSAGE_FILENAME, filename,
-				exceptionErrorMessage);
-	}
 }

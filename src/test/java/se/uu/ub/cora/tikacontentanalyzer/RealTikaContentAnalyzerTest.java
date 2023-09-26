@@ -22,7 +22,7 @@ public class RealTikaContentAnalyzerTest {
 		analyzer = new TikaContentAnalyzer(tika);
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testImageJpeg() throws Exception {
 		File initialFile = new File(TEST_RESOURCE_PATH + "manga.jpg");
 		InputStream resouce = new FileInputStream(initialFile);
@@ -32,53 +32,63 @@ public class RealTikaContentAnalyzerTest {
 		assertEquals(mimeType, "image/jpeg");
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testDocWord97_2003() throws Exception {
 		File initialFile = new File(TEST_RESOURCE_PATH + "testDocWord97-2003.doc");
 		InputStream resouce = new FileInputStream(initialFile);
 
 		String mimeType = analyzer.getMimeType(resouce);
 
-		assertEquals(mimeType, "application/x-tika-msoffice");
-	}
-
-	@Test(enabled = false)
-	public void testDocWord97_2003_Filename() throws Exception {
-		File initialFile = new File(TEST_RESOURCE_PATH + "testDocWord97-2003.doc");
-		InputStream resouce = new FileInputStream(initialFile);
-
-		String mimeType = analyzer.getMimeTypeWithFileName(resouce, initialFile.getName());
-
 		assertEquals(mimeType, "application/msword");
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testDocWord2007_365() throws Exception {
 		File initialFile = new File(TEST_RESOURCE_PATH + "testDocWord2007-365.docx");
 		InputStream resource = new FileInputStream(initialFile);
 
 		String mimeType = analyzer.getMimeType(resource);
 
-		assertEquals(mimeType, "application/x-tika-ooxml");
-	}
-
-	@Test(enabled = false)
-	public void testDocWord2007_365_FileName() throws Exception {
-		File initialFile = new File(TEST_RESOURCE_PATH + "testDocWord2007-365.docx");
-		InputStream resource = new FileInputStream(initialFile);
-
-		String mimeType = analyzer.getMimeTypeWithFileName(resource, initialFile.getName());
-
 		assertEquals(mimeType,
 				"application/vnd.openxmlformats-officedocument.wordprocessingml.document");
 	}
 
-	@Test(enabled = false)
-	public void testMp4_FileName() throws Exception {
+	@Test(enabled = true)
+	public void testExcelODF() throws Exception {
+		File initialFile = new File(TEST_RESOURCE_PATH + "testSheetODF.ods");
+		InputStream resouce = new FileInputStream(initialFile);
+
+		String mimeType = analyzer.getMimeType(resouce);
+
+		assertEquals(mimeType, "application/vnd.oasis.opendocument.spreadsheet");
+	}
+
+	@Test(enabled = true)
+	public void testExcel97_2003() throws Exception {
+		File initialFile = new File(TEST_RESOURCE_PATH + "testSheetExcel97-2003.xls");
+		InputStream resouce = new FileInputStream(initialFile);
+
+		String mimeType = analyzer.getMimeType(resouce);
+
+		assertEquals(mimeType, "application/vnd.ms-excel");
+	}
+
+	@Test(enabled = true)
+	public void testSheetExcel2007_365() throws Exception {
+		File initialFile = new File(TEST_RESOURCE_PATH + "testSheetExcel2007-365.xlsx");
+		InputStream resource = new FileInputStream(initialFile);
+
+		String mimeType = analyzer.getMimeType(resource);
+
+		assertEquals(mimeType, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+	}
+
+	@Test(enabled = true)
+	public void testMp4() throws Exception {
 		File initialFile = new File(TEST_RESOURCE_PATH + "tikaVideo.mp4");
 		InputStream resource = new FileInputStream(initialFile);
 
-		String mimeType = analyzer.getMimeTypeWithFileName(resource, initialFile.getName());
+		String mimeType = analyzer.getMimeType(resource);
 
 		assertEquals(mimeType, "video/mp4");
 	}
