@@ -18,36 +18,26 @@
  */
 package se.uu.ub.cora.tikacontentanalyzer;
 
-import java.io.InputStream;
-
-import org.apache.tika.Tika;
-import org.apache.tika.io.TikaInputStream;
-
 import se.uu.ub.cora.contentanalyzer.ContentAnalyzer;
-import se.uu.ub.cora.contentanalyzer.ContentAnalyzerException;
+import se.uu.ub.cora.contentanalyzer.ContentAnalyzerInstanceProvider;
+import se.uu.ub.cora.tikacontentanalyzer.internal.TikaContentAnalyzerFactory;
+import se.uu.ub.cora.tikacontentanalyzer.internal.TikaContentAnalyzerFactoryImp;
 
-public class TikaContentAnalyzer implements ContentAnalyzer {
+public class TikaContentAnalyzerProvider implements ContentAnalyzerInstanceProvider {
 
-	private static final String DETECTION_ERROR_MESSAGE = "Failed to detect mimetype from resource: ";
-	private Tika tika;
-
-	public TikaContentAnalyzer(Tika tika) {
-		this.tika = tika;
+	@Override
+	public int getOrderToSelectImplementionsBy() {
+		return 0;
 	}
 
 	@Override
-	public String getMimeType(InputStream resource) {
-		try {
-			TikaInputStream tikaInputStream = TikaInputStream.get(resource);
-			return tika.detect(tikaInputStream);
-		} catch (Exception e) {
-			throw ContentAnalyzerException
-					.withMessageAndException(DETECTION_ERROR_MESSAGE + e.getMessage(), e);
-		}
+	public ContentAnalyzer getContentAnalyzer() {
+		TikaContentAnalyzerFactory factory = createTikaContentAnalyzerFactory();
+		return factory.factor();
 	}
 
-	public Tika onlyForTestGetTika() {
-		return tika;
+	TikaContentAnalyzerFactory createTikaContentAnalyzerFactory() {
+		return new TikaContentAnalyzerFactoryImp();
 	}
 
 }
