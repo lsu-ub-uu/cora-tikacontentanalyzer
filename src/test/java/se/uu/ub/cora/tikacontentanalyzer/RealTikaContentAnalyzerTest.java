@@ -154,4 +154,34 @@ public class RealTikaContentAnalyzerTest {
 		assertEquals(mimeType, "application/zip");
 	}
 
+	@Test(enabled = true)
+	public void testPDF() throws Exception {
+		File initialFile = new File(TEST_RESOURCE_PATH + "testPDF.pdf");
+		InputStream resource = new FileInputStream(initialFile);
+
+		String mimeType = analyzer.getMimeType(resource);
+
+		assertEquals(mimeType, "application/pdf");
+	}
+
+	@Test(enabled = true)
+	public void testPDFA1b() throws Exception {
+		File initialFile = new File(TEST_RESOURCE_PATH + "testPDF-A1b.pdf");
+		InputStream resource = new FileInputStream(initialFile);
+
+		String mimeType = analyzer.getMimeType(resource);
+
+		assertEquals(mimeType, "application/pdf");
+	}
+
+	@Test(enabled = true)
+	public void testPDFA2b() throws Exception {
+		File initialFile = new File(TEST_RESOURCE_PATH + "testPDF-A2b.pdf");
+		InputStream resource = new FileInputStream(initialFile);
+
+		String mimeType = analyzer.getMimeType(resource);
+
+		assertEquals(mimeType, "application/pdf");
+	}
+
 }

@@ -11,8 +11,6 @@ import se.uu.ub.cora.contentanalyzer.ContentAnalyzerException;
 public class TikaContentAnalyzer implements ContentAnalyzer {
 
 	private static final String DETECTION_ERROR_MESSAGE = "Failed to detect mimetype from resource: ";
-	private static final String DETECTION_ERROR_MESSAGE_FILENAME = "Failed to detect mimetype from"
-			+ " resource and filename {0}: {1}";
 	private Tika tika;
 
 	public TikaContentAnalyzer(Tika tika) {

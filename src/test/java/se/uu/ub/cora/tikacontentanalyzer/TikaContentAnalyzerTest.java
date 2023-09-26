@@ -4,6 +4,9 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
+import java.io.IOException;
+
+import org.apache.tika.io.TikaInputStream;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -15,9 +18,6 @@ import se.uu.ub.cora.tikacontentanalyzer.spy.TikaSpy;
 public class TikaContentAnalyzerTest {
 
 	private static final String DETECTION_ERROR_MESSAGE = "Failed to detect mimetype from resource: ";
-	private static final String DETECTION_ERROR_MESSAGE_FILENAME = "Failed to detect mimetype from"
-			+ " resource and filename {0}: {1}";
-	private static final String SOME_FILE_NAME = "somefileName";
 	private static final String SOME_EXCEPTION_MESSAGE = "someExceptionMessage";
 	private TikaContentAnalyzer analyzer;
 	private InputStreamSpy inputStream;
@@ -40,8 +40,21 @@ public class TikaContentAnalyzerTest {
 	public void testCallGetMimeType() throws Exception {
 		String mimeType = analyzer.getMimeType(inputStream);
 
-		tika.MCR.assertParameters("detect", 0, inputStream);
 		tika.MCR.assertReturn("detect", 0, mimeType);
+	}
+
+	@Test
+	public void testInputStreamConvertedToTikaInputStream() throws Exception {
+		analyzer.getMimeType(inputStream);
+
+		TikaInputStream tikaInputStream = (TikaInputStream) tika.MCR
+				.getValueForMethodNameAndCallNumberAndParameterName("detect", 0, "stream");
+		assertInputStreamIsConsumed(tikaInputStream);
+	}
+
+	private void assertInputStreamIsConsumed(TikaInputStream tikaInputStream) throws IOException {
+		tikaInputStream.read();
+		inputStream.MCR.assertMethodWasCalled("read");
 	}
 
 	@Test
