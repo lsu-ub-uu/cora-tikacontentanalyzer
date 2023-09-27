@@ -71,8 +71,7 @@ public class TikaContentAnalyzerTest {
 	}
 
 	private void assertInputStreamIsConsumed(TikaInputStream tikaInputStream) throws IOException {
-		tikaInputStream.read();
-		inputStream.MCR.assertMethodWasCalled("read");
+		inputStream.MCR.assertMethodWasCalled("close");
 	}
 
 	@Test
@@ -86,6 +85,7 @@ public class TikaContentAnalyzerTest {
 			assertTrue(e instanceof ContentAnalyzerException);
 			assertEquals(e.getMessage(), DETECTION_ERROR_MESSAGE + SOME_EXCEPTION_MESSAGE);
 			assertEquals(e.getCause(), runtimeException);
+			inputStream.MCR.assertMethodWasCalled("close");
 		}
 	}
 }

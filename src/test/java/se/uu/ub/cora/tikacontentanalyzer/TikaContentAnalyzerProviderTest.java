@@ -20,6 +20,7 @@ package se.uu.ub.cora.tikacontentanalyzer;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
 import org.testng.annotations.BeforeMethod;
@@ -55,20 +56,34 @@ public class TikaContentAnalyzerProviderTest {
 		TikaContentAnalyzer contentAnalyzer = (TikaContentAnalyzer) provider.getContentAnalyzer();
 
 		assertNotNull(contentAnalyzer);
+
 	}
 
 	@Test
 	public void testContentAnalyzerCreatedUsingFactor() throws Exception {
-		TikaContentAnalyzerProviderExtendedForTest providerForTest = new TikaContentAnalyzerProviderExtendedForTest();
-		providerForTest.getContentAnalyzer();
+		provider.onlyForTestSetFactory(factory);
+
+		provider.getContentAnalyzer();
 
 		factory.MCR.assertMethodWasCalled("factor");
+
 	}
 
-	public class TikaContentAnalyzerProviderExtendedForTest extends TikaContentAnalyzerProvider {
-		@Override
-		public TikaContentAnalyzerFactory createTikaContentAnalyzerFactory() {
-			return factory;
-		}
+	@Test
+	public void testDefaultFactory() throws Exception {
+		TikaContentAnalyzerFactory factory = provider.onlyForTestGetFactory();
+		assertTrue(factory instanceof TikaContentAnalyzerFactory);
+	}
+
+	@Test
+	public void testProviderOnlyCreatesFactoryOnce() throws Exception {
+
+		provider.getContentAnalyzer();
+		TikaContentAnalyzerFactory factory1 = provider.onlyForTestGetFactory();
+
+		provider.getContentAnalyzer();
+		TikaContentAnalyzerFactory factory2 = provider.onlyForTestGetFactory();
+
+		assertSame(factory1, factory2);
 	}
 }

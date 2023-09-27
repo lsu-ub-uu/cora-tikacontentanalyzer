@@ -25,6 +25,8 @@ import se.uu.ub.cora.tikacontentanalyzer.internal.TikaContentAnalyzerFactoryImp;
 
 public class TikaContentAnalyzerProvider implements ContentAnalyzerInstanceProvider {
 
+	TikaContentAnalyzerFactory factory = new TikaContentAnalyzerFactoryImp();
+
 	@Override
 	public int getOrderToSelectImplementionsBy() {
 		return 0;
@@ -32,12 +34,15 @@ public class TikaContentAnalyzerProvider implements ContentAnalyzerInstanceProvi
 
 	@Override
 	public ContentAnalyzer getContentAnalyzer() {
-		TikaContentAnalyzerFactory factory = createTikaContentAnalyzerFactory();
 		return factory.factor();
 	}
 
-	TikaContentAnalyzerFactory createTikaContentAnalyzerFactory() {
-		return new TikaContentAnalyzerFactoryImp();
+	void onlyForTestSetFactory(TikaContentAnalyzerFactory factory) {
+		this.factory = factory;
+	}
+
+	public TikaContentAnalyzerFactory onlyForTestGetFactory() {
+		return factory;
 	}
 
 }

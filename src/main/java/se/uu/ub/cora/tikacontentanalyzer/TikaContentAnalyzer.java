@@ -37,8 +37,7 @@ public class TikaContentAnalyzer implements ContentAnalyzer {
 
 	@Override
 	public String getMimeType(InputStream resource) {
-		try {
-			TikaInputStream tikaInputStream = TikaInputStream.get(resource);
+		try (TikaInputStream tikaInputStream = TikaInputStream.get(resource)) {
 			return tika.detect(tikaInputStream);
 		} catch (Exception e) {
 			throw ContentAnalyzerException

@@ -38,4 +38,9 @@ public class InputStreamSpy extends InputStream {
 	public int read() throws IOException {
 		return (int) MCR.addCallAndReturnFromMRV();
 	}
+
+	@Override
+	public void close() throws IOException {
+		MCR.addCall();
+	}
 }
