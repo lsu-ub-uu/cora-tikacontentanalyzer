@@ -26,7 +26,7 @@
 	</parent>
 
 	<artifactId>tikacontentanalyzer</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<name>Tika Content Analyzer</name>
 
@@ -43,7 +43,7 @@
 		<connection>scm:git:https://github.com/lsu-ub-uu/cora-tikacontentanalyzer.git</connection>
 		<developerConnection>scm:git:https://github.com/lsu-ub-uu/cora-tikacontentanalyzer.git</developerConnection>
 		<url>https://github.com/lsu-ub-uu/cora-tikacontentanalyzer.git</url>
-		<tag>release/1.0</tag>
+		<tag>tikacontentanalyzer-1.0.0</tag>
 	</scm>
 
 	<dependencies>
