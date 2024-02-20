@@ -36,7 +36,6 @@
 		<contentanalyzer.version>1.0.0</contentanalyzer.version>
 		<logger.version>2.10.0</logger.version>
 		<testutils.version>1.11.0</testutils.version>
-		<!--		<testspies.version>1.2.0</testspies.version>-->
 	</properties>
 
 	<scm>
@@ -85,11 +84,5 @@
 			<version>${testutils.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<!--		<dependency>-->
-		<!--			<groupId>se.uu.ub.cora</groupId>-->
-		<!--			<artifactId>testspies</artifactId>-->
-		<!--			<version>${testspies.version}</version>-->
-		<!--			<scope>test</scope>-->
-		<!--		</dependency>-->
 	</dependencies>
 </project>
