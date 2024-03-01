@@ -26,7 +26,7 @@ import static org.testng.Assert.assertTrue;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import se.uu.ub.cora.contentanalyzer.ContentAnalyzerInstanceProvider;
+import se.uu.ub.cora.binary.contentanalyzer.ContentAnalyzerInstanceProvider;
 import se.uu.ub.cora.tikacontentanalyzer.internal.TikaContentAnalyzerFactory;
 import se.uu.ub.cora.tikacontentanalyzer.spy.TikaContentAnalyzerFactorySpy;
 

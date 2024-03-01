@@ -28,8 +28,8 @@ import org.apache.tika.io.TikaInputStream;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import se.uu.ub.cora.contentanalyzer.ContentAnalyzer;
-import se.uu.ub.cora.contentanalyzer.ContentAnalyzerException;
+import se.uu.ub.cora.binary.BinaryException;
+import se.uu.ub.cora.binary.contentanalyzer.ContentAnalyzer;
 import se.uu.ub.cora.tikacontentanalyzer.spy.InputStreamSpy;
 import se.uu.ub.cora.tikacontentanalyzer.spy.TikaSpy;
 
@@ -82,7 +82,7 @@ public class TikaContentAnalyzerTest {
 			analyzer.getMimeType(inputStream);
 			fail();
 		} catch (Exception e) {
-			assertTrue(e instanceof ContentAnalyzerException);
+			assertTrue(e instanceof BinaryException);
 			assertEquals(e.getMessage(), DETECTION_ERROR_MESSAGE + SOME_EXCEPTION_MESSAGE);
 			assertEquals(e.getCause(), runtimeException);
 			inputStream.MCR.assertMethodWasCalled("close");

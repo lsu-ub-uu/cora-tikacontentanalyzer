@@ -23,8 +23,8 @@ import java.io.InputStream;
 import org.apache.tika.Tika;
 import org.apache.tika.io.TikaInputStream;
 
-import se.uu.ub.cora.contentanalyzer.ContentAnalyzer;
-import se.uu.ub.cora.contentanalyzer.ContentAnalyzerException;
+import se.uu.ub.cora.binary.BinaryException;
+import se.uu.ub.cora.binary.contentanalyzer.ContentAnalyzer;
 
 public class TikaContentAnalyzer implements ContentAnalyzer {
 	private static final String DETECTION_ERROR_MESSAGE = "Failed to detect mimetype from resource: ";
@@ -39,8 +39,8 @@ public class TikaContentAnalyzer implements ContentAnalyzer {
 		try (TikaInputStream tikaInputStream = TikaInputStream.get(resource)) {
 			return tika.detect(tikaInputStream);
 		} catch (Exception e) {
-			throw ContentAnalyzerException
-					.withMessageAndException(DETECTION_ERROR_MESSAGE + e.getMessage(), e);
+			throw BinaryException.withMessageAndException(DETECTION_ERROR_MESSAGE + e.getMessage(),
+					e);
 		}
 	}
 
