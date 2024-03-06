@@ -18,8 +18,8 @@
  */
 package se.uu.ub.cora.tikacontentanalyzer;
 
-import se.uu.ub.cora.contentanalyzer.ContentAnalyzer;
-import se.uu.ub.cora.contentanalyzer.ContentAnalyzerInstanceProvider;
+import se.uu.ub.cora.binary.contentanalyzer.ContentAnalyzer;
+import se.uu.ub.cora.binary.contentanalyzer.ContentAnalyzerInstanceProvider;
 import se.uu.ub.cora.tikacontentanalyzer.internal.TikaContentAnalyzerFactory;
 import se.uu.ub.cora.tikacontentanalyzer.internal.TikaContentAnalyzerFactoryImp;
 

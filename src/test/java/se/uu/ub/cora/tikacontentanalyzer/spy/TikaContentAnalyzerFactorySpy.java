@@ -1,6 +1,6 @@
 package se.uu.ub.cora.tikacontentanalyzer.spy;
 
-import se.uu.ub.cora.contentanalyzer.ContentAnalyzer;
+import se.uu.ub.cora.binary.contentanalyzer.ContentAnalyzer;
 import se.uu.ub.cora.testutils.mcr.MethodCallRecorder;
 import se.uu.ub.cora.testutils.mrv.MethodReturnValues;
 import se.uu.ub.cora.tikacontentanalyzer.internal.TikaContentAnalyzerFactory;
