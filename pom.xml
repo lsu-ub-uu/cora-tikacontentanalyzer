@@ -31,9 +31,9 @@
 	<name>Tika Content Analyzer</name>
 
 	<properties>
-		<tika.version>2.9.0</tika.version>
-		<commonsio.version>2.14.0</commonsio.version>
-		<contentanalyzer.version>2.0-SNAPSHOT</contentanalyzer.version>
+		<tika.version>2.9.1</tika.version>
+		<commonsio.version>2.15.1</commonsio.version>
+		<contentanalyzer.version>2.0.0</contentanalyzer.version>
 		<logger.version>2.10.0</logger.version>
 		<testutils.version>1.11.0</testutils.version>
 	</properties>
